@@ -88,23 +88,30 @@
   </iframe>
 </div>
 
-    <button id="startBtn" disabled>
-      Start Quiz
-    </button>
+    <div style="margin: 15px 0;">
+  <input type="checkbox" id="confirmWatch" onchange="toggleButton()">
+  <label for="confirmWatch">I confirm I have watched the video</label>
+</div>
+
+<button id="startBtn" onclick="startQuiz()" disabled>
+  Start Quiz
+</button>
   </div>
 
   <script>
     const video = document.getElementById("trainingVideo");
     const button = document.getElementById("startBtn");
 
-    // Enable button ONLY when video finishes
-    video.addEventListener("ended", () => {
-      button.disabled = false;
-      button.classList.add("enabled");
-    });
+<script>
+  function toggleButton() {
+    const checkbox = document.getElementById("confirmWatch");
+    const button = document.getElementById("startBtn");
+
+    button.disabled = !checkbox.checked;
+  }
 
     // Random quiz redirect
-    button.addEventListener("click", () => {
+    function startQuiz() {
       const quizzes = [
         "https://forms.office.com/r/uErqVt007N",
         "https://forms.office.com/r/RhD58pX4cT",
@@ -115,7 +122,6 @@
       const randomIndex = Math.floor(Math.random() * quizzes.length);
       const selectedQuiz = quizzes[randomIndex];
 
-      window.location.href = selectedQuiz;
     });
   </script>
 
