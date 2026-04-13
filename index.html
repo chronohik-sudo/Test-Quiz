@@ -26,14 +26,6 @@
       text-align: center;
     }
 
-    h2 {
-      margin-top: 0;
-    }
-
-    p {
-      color: #555;
-    }
-
     .video-wrapper {
       width: 100%;
       height: 400px;
@@ -43,24 +35,21 @@
       background: black;
     }
 
-    .video-wrapper iframe {
+    iframe {
       width: 100%;
       height: 100%;
       border: none;
     }
 
     button {
-      padding: 14px 28px;
-      font-size: 18px;
+      padding: 12px 24px;
+      font-size: 16px;
+      margin: 10px;
       background-color: #2c5364;
       color: white;
       border: none;
       border-radius: 6px;
       cursor: pointer;
-      width: 100%;
-      max-width: 300px;
-      transition: 0.3s;
-      margin-top: 20px;
     }
 
     button:hover {
@@ -73,43 +62,47 @@
 
 <div class="container">
 
-  <h2>📹 Safety Training Videos</h2>
-  <p>Please watch the videos before starting the quiz.</p>
+  <h2>📹 Safety Training</h2>
 
-  <!-- VIDEO 1 -->
-  <h3>Video 1</h3>
+  <!-- VIDEO CONTAINER -->
   <div class="video-wrapper">
-    <iframe 
-      src="https://dmostechnologies1-my.sharepoint.com/personal/izz_dmostechnologies_com/_layouts/15/embed.aspx?UniqueId=d226cc28-9c8e-41d4-8e8f-a845f5882025"
+    <iframe id="videoFrame"
+      src="PASTE_VIDEO_1_LINK_HERE"
       allowfullscreen>
     </iframe>
   </div>
 
-  <!-- VIDEO 2 -->
-  <h3>Video 2</h3>
-  <div class="video-wrapper">
-    <iframe 
-      src="https://dmostechnologies1-my.sharepoint.com/personal/izz_dmostechnologies_com/_layouts/15/embed.aspx?UniqueId=6c47e539-c4ef-46f3-923e-9a231fb6c17e""
-      allowfullscreen>
-    </iframe>
+  <!-- BUTTONS -->
+  <div id="controls">
+    <button onclick="nextVideo()">Next</button>
   </div>
-
-  <!-- VIDEO 3 (Optional) -->
-  <!--
-  <h3>Video 3</h3>
-  <div class="video-wrapper">
-    <iframe src="YOUR_VIDEO_LINK_3" allowfullscreen></iframe>
-  </div>
-  -->
-
-  <!-- BUTTON -->
-  <button onclick="startQuiz()">
-    Start Quiz
-  </button>
 
 </div>
 
 <script>
+let currentVideo = 0;
+
+const videos = [
+  "https://dmostechnologies1-my.sharepoint.com/personal/izz_dmostechnologies_com/_layouts/15/embed.aspx?UniqueId=d226cc28-9c8e-41d4-8e8f-a845f5882025",
+  "https://dmostechnologies1-my.sharepoint.com/personal/izz_dmostechnologies_com/_layouts/15/embed.aspx?UniqueId=6c47e539-c4ef-46f3-923e-9a231fb6c17e"
+];
+
+function nextVideo() {
+  currentVideo++;
+
+  const frame = document.getElementById("videoFrame");
+  const controls = document.getElementById("controls");
+
+  if (currentVideo < videos.length) {
+    frame.src = videos[currentVideo];
+  } else {
+    // Replace buttons with Start Quiz
+    controls.innerHTML = `
+      <button onclick="startQuiz()">Start Quiz</button>
+    `;
+  }
+}
+
 function startQuiz() {
   const quizzes = [
     "https://forms.office.com/r/uErqVt007N",
